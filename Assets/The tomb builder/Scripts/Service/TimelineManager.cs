@@ -6,7 +6,7 @@ using UniRx;
 public class TimelineManager : MonoBehaviour
 {
     private float _currentTime;
-    private bool _isTimerStart;
+    private bool _isTimerPause;
 
     [Header("Длина таймера(в сек.)")]
     [SerializeField] private float _longTimer;
@@ -21,6 +21,9 @@ public class TimelineManager : MonoBehaviour
 
     public void UpdateTimer()
     {
+        if (_isTimerPause)
+            return;
+
         _currentTime += Time.deltaTime;
         if (_currentTime >= _longTimer)
             OnTimerEndCommand.Execute();
@@ -28,10 +31,13 @@ public class TimelineManager : MonoBehaviour
         _timelineView.UpdateTimeline(_currentTime / _longTimer);
     }
 
+    public void SetPauseTimer(bool value)
+        => _isTimerPause = value;
+
     private void Start()
     {
         _currentTime = 0;
-        _isTimerStart = true;
+        _isTimerPause = false;
     }
 
     private void OnDestroy()

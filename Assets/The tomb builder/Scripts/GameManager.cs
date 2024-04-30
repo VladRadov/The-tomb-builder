@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HealthManager _healthManager;
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private CameraMove _cameraMove;
+    [SerializeField] private PauseManager _pauseManager;
 
     private Tomb _tomb;
 
@@ -28,6 +29,10 @@ public class GameManager : MonoBehaviour
 
     private void Subscriber()
     {
+        _pauseManager.SubscribeOnContinueCommand(_ => { _systemInput.OnSetActivePause(false); });
+        _pauseManager.SubscribeOnContinueCommand(_ => { _timelineManager.SetPauseTimer(false); });
+        _pauseManager.ActivePauseComand.Subscribe(_ => { _timelineManager.SetPauseTimer(true); });
+        _pauseManager.ActivePauseComand.Subscribe(_ => { _systemInput.OnSetActivePause(true); });
         _timelineManager.OnTimerEndCommand.Subscribe(_ => { _timelineManager.RestartTimer(); });
         _timelineManager.OnTimerEndCommand.Subscribe(_ => { _tombController.OnEndTimer(); });
         _timelineManager.OnTimerEndCommand.Subscribe(_ => { _healthManager.Damage(); });
@@ -42,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     private void AddObjectsDisposable()
     {
+        ManagerUniRx.AddObjectDisposable(_pauseManager.ActivePauseComand);
         ManagerUniRx.AddObjectDisposable(_systemInput.OnMouseDownCommand);
         ManagerUniRx.AddObjectDisposable(_systemInput.OnMouseUpCommand);
         ManagerUniRx.AddObjectDisposable(_spawnerController.OnSpawnBlockComand);
