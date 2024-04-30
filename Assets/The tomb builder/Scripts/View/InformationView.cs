@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsView : MonoBehaviour
+public class InformationView : MonoBehaviour
 {
     [SerializeField] private Button _close;
 

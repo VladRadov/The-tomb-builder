@@ -7,19 +7,21 @@ public class SaveerDataInPlayerPrefs : SaveerData
 {
     private readonly string KEY_NUMBER_LEVEL = "Level";
     private readonly string KEY_COUNT_COIN = "Coins";
-    private readonly string KEY_OPEN_LEVELS = "OpenLevels";
+    private readonly string KEY_PURCHASED_LEVELS = "PurchasedLevels";
     private readonly string KEY_IS_MUSIC_ON = "IsMusicOn";
     private readonly string KEY_IS_SOUND_ON = "IsSoundOn";
     private readonly string KEY_IS_VIBRATION_ON = "IsVibrationOn";
     private readonly string KEY_COUNT_HELTH = "Health";
+    private readonly string KEY_END_LEVELS = "EndLevels";
 
     public int Level { get { return Load<int>(KEY_NUMBER_LEVEL, 1); } set { Save<int>(KEY_NUMBER_LEVEL, value); } }
     public int Coins { get { return Load<int>(KEY_COUNT_COIN, 0); } set { Save<int>(KEY_COUNT_COIN, value); } }
-    public string OpenLevels { get { return Load<string>(KEY_OPEN_LEVELS, "1"); } set { Save<string>(KEY_OPEN_LEVELS, value); } }
+    public string PurchasedLevels { get { return Load<string>(KEY_PURCHASED_LEVELS, "1"); } set { Save<string>(KEY_PURCHASED_LEVELS, value); } }
     public string IsMusicOn { get { return Load<string>(KEY_IS_MUSIC_ON, "1"); } set { Save<string>(KEY_IS_MUSIC_ON, value); } }
     public string IsSoundOn { get { return Load<string>(KEY_IS_SOUND_ON, "1"); } set { Save<string>(KEY_IS_SOUND_ON, value); } }
     public string IsVibrationOn { get { return Load<string>(KEY_IS_VIBRATION_ON, "1"); } set { Save<string>(KEY_IS_VIBRATION_ON, value); } }
     public int Health { get { return Load<int>(KEY_COUNT_HELTH, 1); } set { Save<int>(KEY_COUNT_HELTH, value); } }
+    public string EndLevels { get { return Load<string>(KEY_END_LEVELS, "0"); } set { Save<string>(KEY_END_LEVELS, value); } }
 
     public override T Load<T>(string nameParameter, T defaultValue)
     {

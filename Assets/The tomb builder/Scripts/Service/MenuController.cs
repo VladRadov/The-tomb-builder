@@ -12,6 +12,9 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Button _startGame;
 
     [SerializeField] private SettingsView _settingsView;
+    [SerializeField] private ShopView _shopView;
+    [SerializeField] private LevelsView _levelsView;
+    [SerializeField] private InformationView _informationView;
 
     private void Start()
     {
@@ -23,26 +26,26 @@ public class MenuController : MonoBehaviour
 
         _openInformation.onClick.AddListener(() =>
         {
-
+            _informationView.SetActive(true);
             AudioManager.Instance.PlayClickButton();
         });
 
         _openShop.onClick.AddListener(() =>
         {
-
+            _shopView.SetActive(true);
             AudioManager.Instance.PlayClickButton();
         });
 
         _levels.onClick.AddListener(() =>
         {
-
+            _levelsView.SetActive(true);
             AudioManager.Instance.PlayClickButton();
         });
 
         _startGame.onClick.AddListener(() =>
         {
-
             AudioManager.Instance.PlayClickButton();
+            ManagerScenes.Instance.LoadAsyncFromCoroutine("Game");
         });
     }
 }
