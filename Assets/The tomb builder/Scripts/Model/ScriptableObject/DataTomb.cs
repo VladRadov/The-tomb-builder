@@ -6,6 +6,8 @@ using UnityEngine;
 public class DataTomb : ScriptableObject
 {
     [SerializeField] private Vector2 _positionFirstBlock;
+    [SerializeField] private float _minDistanceEqualBlock;
 
     public Vector2 PositionFirstBlock => _positionFirstBlock;
+    public float MinDistanceEqualBlock => _minDistanceEqualBlock;
 }

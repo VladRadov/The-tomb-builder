@@ -7,12 +7,10 @@ using UniRx;
 public class BlockView : MonoBehaviour
 {
     private bool _isBuilded;
-    private bool _isGetMoney;
 
     [SerializeField] private Vector3 _stepIncreaseScale;
     [SerializeField] private float _speedIncreaseScale;
     [SerializeField] private Color _colorDrop;
-    [SerializeField] private float _minDistanceForEqualBuilded;
     [Header("Components")]
     [SerializeField] private Transform _center;
     [SerializeField] private Image _image;
@@ -25,8 +23,9 @@ public class BlockView : MonoBehaviour
     public float Width => _rectTransform.localScale.x;
     public Vector3 StepIncreaseScale => _stepIncreaseScale;
     public float SpeedIncreaseScale => _speedIncreaseScale;
+
     public ReactiveCommand OnBlockDownCommand = new();
-    public ReactiveCommand OnWidthBlockEqualCommand = new();
+    public ReactiveCommand OnSizeLimitExceededCommand = new();
 
     public void SetSpriteBlock(Sprite sprite)
         => _image.sprite = sprite;
@@ -53,7 +52,7 @@ public class BlockView : MonoBehaviour
     private void Start()
     {
         ManagerUniRx.AddObjectDisposable(OnBlockDownCommand);
-        ManagerUniRx.AddObjectDisposable(OnWidthBlockEqualCommand);
+        ManagerUniRx.AddObjectDisposable(OnSizeLimitExceededCommand);
     }
 
     private void FixedUpdate()
@@ -64,18 +63,15 @@ public class BlockView : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        var wallView = collision.gameObject.GetComponent<WallView>();
+
+        if (wallView)
+            OnSizeLimitExceededCommand.Execute();
+
         var blockVIew = collision.gameObject.GetComponent<BlockView>();
 
         if (blockVIew)
-        {
             _isBuilded = true;
-
-            if (_isGetMoney == false && Mathf.Abs(blockVIew.Width - Width) <= _minDistanceForEqualBuilded)
-            {
-                _isGetMoney = true;
-                OnWidthBlockEqualCommand.Execute();
-            }
-        }
     }
 
     private void OnValidate()
@@ -96,6 +92,6 @@ public class BlockView : MonoBehaviour
     private void OnDestroy()
     {
         ManagerUniRx.Dispose(OnBlockDownCommand);
-        ManagerUniRx.Dispose(OnWidthBlockEqualCommand);
+        ManagerUniRx.Dispose(OnSizeLimitExceededCommand);
     }
 }

@@ -5,6 +5,8 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    private int _countMoneyOfOneGame;
+
     [SerializeField] private List<TextMeshProUGUI> _viewsScore;
     [SerializeField] private TextMeshProUGUI _viewMoney;
     [SerializeField] private int _increaseScore;
@@ -19,8 +21,9 @@ public class ScoreManager : MonoBehaviour
     public void AddMoney()
     {
         AudioManager.Instance.PlayGetMoney();
+        _countMoneyOfOneGame += _increaseScore;
         ContainerSaveerPlayerPrefs.Instance.SaveerData.Money += _increaseScore;
-        _viewMoney.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.Money.ToString();
+        _viewMoney.text = _countMoneyOfOneGame.ToString();
     }
 
     private void UpdateViewScore()
@@ -32,6 +35,7 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins = 0;
+        _countMoneyOfOneGame = 0;
         UpdateViewScore();
     }
 }

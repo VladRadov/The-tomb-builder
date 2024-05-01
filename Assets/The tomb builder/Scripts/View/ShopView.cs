@@ -15,7 +15,7 @@ public class ShopView : MonoBehaviour
         => gameObject.SetActive(value);
 
     public void UpdateViewCoins()
-        => _coins.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins.ToString();
+        => _coins.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.Money.ToString();
 
     private void Start()
     {

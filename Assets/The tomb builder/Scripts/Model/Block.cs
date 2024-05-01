@@ -35,7 +35,6 @@ public class Block : IDisposable
 
     public void IncreaseScale()
     {
-        //var newScale = Vector3.Lerp(Scale.Value, Scale.Value + _stepIncreaseScale, _speedIncreaseScale);
         Scale.Value += _stepIncreaseScale;
     }
 

@@ -21,7 +21,7 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
-        ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins = 1000;
+        //ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins = 1000;
         _openSettings.onClick.AddListener(() =>
         {
             _settingsView.SetActive(true);

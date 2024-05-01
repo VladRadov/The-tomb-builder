@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DataTomb
   m_EditorClassIdentifier: 
   _positionFirstBlock: {x: 0, y: -250}
+  _minDistanceEqualBlock: 0.05

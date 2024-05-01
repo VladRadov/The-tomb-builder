@@ -12,7 +12,8 @@ public class TombController
 
     public ReactiveCommand OnTombDestroyCommand = new ();
     public ReactiveCommand OnWinGame = new();
-    public ReactiveCommand OnGetMoneyCommand = new();
+    public ReactiveCommand OnBlocksEqualCommand = new();
+    public ReactiveCommand OnSizeLimitExceededCommand = new();
 
     public TombController(Tomb tomb)
     {
@@ -29,7 +30,7 @@ public class TombController
         _isBlockBuild = true;
         _lastBlockView = blockView;
         blockView.OnBlockDownCommand.Subscribe(_ => { OnTombDestroyCommand.Execute(); });
-        blockView.OnWidthBlockEqualCommand.Subscribe(_ => { OnGetMoneyCommand.Execute(); });
+        blockView.OnSizeLimitExceededCommand.Subscribe(_ => { OnSizeLimitExceededCommand.Execute(); });
 
         var block = new Block();
         block.Center = blockView.Center;
@@ -41,6 +42,12 @@ public class TombController
 
         _tomb.BuildTomb(block);
         AudioManager.Instance.PlayBuildBlock();
+    }
+
+    public void CheckingGetMoney()
+    {
+        if (_tomb.TryBlocksEqual())
+            OnBlocksEqualCommand.Execute();
     }
 
     public bool TryBuildBlockTop()
@@ -64,6 +71,7 @@ public class TombController
         {
             _isBlockBuild = false;
             _tomb.DeleteLastBlock();
+            _tomb.SetIsIncreaseScaleLastBlock(false);
             _lastBlockView.StartCoroutineDropBlock();
         }
     }
@@ -71,5 +79,13 @@ public class TombController
     public void BaseUpdate()
     {
         _tomb.IncreaseScaleLastBlock();
+    }
+
+    public void OnDestroy()
+    {
+        ManagerUniRx.Dispose(OnTombDestroyCommand);
+        ManagerUniRx.Dispose(OnWinGame);
+        ManagerUniRx.Dispose(OnBlocksEqualCommand);
+        ManagerUniRx.Dispose(OnSizeLimitExceededCommand);
     }
 }

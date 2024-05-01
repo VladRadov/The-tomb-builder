@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSourceMusic;
     [SerializeField] private AudioSource _audioSourceSound;
+    [SerializeField] private AudioSource _audioSourceSound2;
     [SerializeField] private List<Sound> _audio;
 
     public static AudioManager Instance { get; private set; }
@@ -21,9 +22,15 @@ public class AudioManager : MonoBehaviour
     public void ChangeStateSound()
     {
         if (ContainerSaveerPlayerPrefs.Instance.SaveerData.IsSoundOn == "1")
+        {
             _audioSourceSound.Play();
+            _audioSourceSound2.Play();
+        }
         else
+        {
             _audioSourceSound.Stop();
+            _audioSourceSound2.Stop();
+        }
     }
 
     public bool IsAudioOn()
@@ -32,7 +39,7 @@ public class AudioManager : MonoBehaviour
     public bool IsSoundOn()
         => ContainerSaveerPlayerPrefs.Instance.SaveerData.IsSoundOn == "1" ? true : false;
 
-    public void PlayClickButton() => PlaySound("ClickButton");
+    public void PlayClickButton() => PlaySound("ClickButton", _audioSourceSound);
 
     public void PlayMusicMenu() => PlayMusic("Menu", true);
 
@@ -42,15 +49,15 @@ public class AudioManager : MonoBehaviour
 
     public void PlayGameOver() => PlayMusic("GameOver", false);
 
-    public void PlayGetScore() => PlaySound("GetScore");
+    public void PlayGetScore() => PlaySound("GetScore", _audioSourceSound);
 
-    public void PlayGetMoney() => PlaySound("GetMoney");
+    public void PlayGetMoney() => PlaySound("GetMoney", _audioSourceSound2);
 
-    public void PlayDropTomb() => PlaySound("DropTomb");
+    public void PlayDropTomb() => PlaySound("DropTomb", _audioSourceSound);
 
-    public void PlayBuildBlock() => PlaySound("BuildBlock");
+    public void PlayBuildBlock() => PlaySound("BuildBlock", _audioSourceSound);
 
-    public void PlayNotEnoughMoney() => PlaySound("NotEnoughMoney");
+    public void PlayNotEnoughMoney() => PlaySound("NotEnoughMoney", _audioSourceSound);
 
     private void PlayMusic(string name, bool isLoop)
     {
@@ -77,14 +84,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void PlaySound(string name)
+    private void PlaySound(string name, AudioSource audioSource)
     {
         var audio = FindAudio(name);
 
         if (audio != null && IsSoundOn())
         {
-            _audioSourceSound.clip = audio.Music;
-            _audioSourceSound.Play();
+            audioSource.clip = audio.Music;
+            audioSource.Play();
         }
     }
 
@@ -106,7 +113,10 @@ public class AudioManager : MonoBehaviour
             _audioSourceMusic.Stop();
 
         if (IsSoundOn() == false)
+        {
             _audioSourceSound.Stop();
+            _audioSourceSound2.Stop();
+        }
 
         SetMusicSource(ManagerScenes.Instance.NameActiveScene);
     }
