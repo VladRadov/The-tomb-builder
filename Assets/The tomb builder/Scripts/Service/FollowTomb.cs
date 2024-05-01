@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class CameraMove : MonoBehaviour
+public class FollowTomb : MonoBehaviour
 {
     private Vector3 _target;
 
     [SerializeField] private float _speed;
-    [SerializeField] private Vector3 _step;
 
-    public void SetTarget()
-        => _target = transform.position + _step;
+    public void SetTarget(Vector3 position)
+    {
+        if(position.y > 0)
+            _target = new Vector3(transform.position.x, position.y);
+    }
 
     private void Move()
     {

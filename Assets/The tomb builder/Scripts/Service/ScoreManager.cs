@@ -10,6 +10,8 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore()
     {
+        AudioManager.Instance.PlayGetCoin();
+        ContainerSaveerPlayerPrefs.Instance.SaveerData.CoinsGame += _increaseScore;
         ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins += _increaseScore;
         UpdateViewScore();
     }
@@ -17,11 +19,12 @@ public class ScoreManager : MonoBehaviour
     private void UpdateViewScore()
     {
         foreach (var viewScore in _viewsScore)
-            viewScore.text = "Score: " + ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins.ToString();
+            viewScore.text = "Score: " + ContainerSaveerPlayerPrefs.Instance.SaveerData.CoinsGame.ToString();
     }
 
     private void Start()
     {
+        ContainerSaveerPlayerPrefs.Instance.SaveerData.CoinsGame = 0;
         UpdateViewScore();
     }
 }

@@ -22,6 +22,7 @@ public class GameOverView : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayGameOver();
         _restart.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayClickButton();
@@ -36,7 +37,7 @@ public class GameOverView : MonoBehaviour
 
     private void OnEnable()
     {
-        _coinsOfGame.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins.ToString();
-        _coinsAllGame.text = "Score: " + ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins.ToString();
+        _coinsOfGame.text = "Score: " + ContainerSaveerPlayerPrefs.Instance.SaveerData.CoinsGame.ToString();
+        _coinsAllGame.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins.ToString();
     }
 }

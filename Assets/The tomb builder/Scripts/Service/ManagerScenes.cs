@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,28 +17,35 @@ public class ManagerScenes : MonoBehaviour
 
     public void LoadAsyncFromCoroutine(string nameScene) => StartCoroutine(LoadAsync(nameScene));
 
+    public void LoadAsyncFromCoroutine(string nameScene, Action action) => StartCoroutine(LoadAsync(nameScene, action));
+
     private void Awake()
     {
         if (Instance != null)
-            Destroy(Instance.gameObject);
-
-        Instance = this;
-        DontDestroyOnLoad(this);
+            Destroy(gameObject);
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
         //StartLoadingSceneEventHandler.AddListener(() => { _loadingView.OnStarLoadingScene(); });
         //LoadingSceneEventHandler.AddListener(() => { StartCoroutine(_loadingView.StartLoading()); });
     }
 
-    private IEnumerator LoadAsync(string nameScene)
+    private IEnumerator LoadAsync(string nameScene, Action action = null)
     {
         var operation = SceneManager.LoadSceneAsync(nameScene, LoadSceneMode.Single);
         StartLoadingSceneEventHandler?.Invoke();
 
-        while (operation.progress <= 1)
+        while (operation.progress < 1)
         {
             var progressInPercent = (int)(operation.progress * 100);
             LoadingSceneEventHandler?.Invoke();
 
             yield return null;
         }
+
+        if (action != null)
+            action.Invoke();
     }
 }

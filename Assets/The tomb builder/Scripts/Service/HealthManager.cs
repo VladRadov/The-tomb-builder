@@ -30,6 +30,7 @@ public class HealthManager : MonoBehaviour
     private void Start()
     {
         _currentHealthIcon = new List<HealthIconView>();
+        _currentHealth = _countHealth;
 
         for (int i = 0; i < _countHealth; i++)
         {

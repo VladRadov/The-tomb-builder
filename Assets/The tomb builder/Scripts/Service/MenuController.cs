@@ -16,6 +16,9 @@ public class MenuController : MonoBehaviour
     [SerializeField] private LevelsView _levelsView;
     [SerializeField] private InformationView _informationView;
 
+    public void ActivePanelShop()
+        => _shopView.SetActive(true);
+
     private void Start()
     {
         _openSettings.onClick.AddListener(() =>

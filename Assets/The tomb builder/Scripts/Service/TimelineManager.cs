@@ -14,6 +14,9 @@ public class TimelineManager : MonoBehaviour
 
     public ReactiveCommand OnTimerEndCommand = new();
 
+    public void SetLongTimer(int value)
+        => _longTimer = value;
+
     public void RestartTimer()
     {
         _currentTime = 0;

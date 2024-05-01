@@ -7,6 +7,7 @@ public class SaveerDataInPlayerPrefs : SaveerData
 {
     private readonly string KEY_NUMBER_LEVEL = "Level";
     private readonly string KEY_COUNT_COIN = "Coins";
+    private readonly string KEY_COUNT_COINGAME = "CoinsGame";
     private readonly string KEY_PURCHASED_LEVELS = "PurchasedLevels";
     private readonly string KEY_IS_MUSIC_ON = "IsMusicOn";
     private readonly string KEY_IS_SOUND_ON = "IsSoundOn";
@@ -16,6 +17,7 @@ public class SaveerDataInPlayerPrefs : SaveerData
 
     public int Level { get { return Load<int>(KEY_NUMBER_LEVEL, 1); } set { Save<int>(KEY_NUMBER_LEVEL, value); } }
     public int Coins { get { return Load<int>(KEY_COUNT_COIN, 0); } set { Save<int>(KEY_COUNT_COIN, value); } }
+    public int CoinsGame { get { return Load<int>(KEY_COUNT_COINGAME, 0); } set { Save<int>(KEY_COUNT_COINGAME, value); } }
     public string PurchasedLevels { get { return Load<string>(KEY_PURCHASED_LEVELS, "1"); } set { Save<string>(KEY_PURCHASED_LEVELS, value); } }
     public string IsMusicOn { get { return Load<string>(KEY_IS_MUSIC_ON, "1"); } set { Save<string>(KEY_IS_MUSIC_ON, value); } }
     public string IsSoundOn { get { return Load<string>(KEY_IS_SOUND_ON, "1"); } set { Save<string>(KEY_IS_SOUND_ON, value); } }

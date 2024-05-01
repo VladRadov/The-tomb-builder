@@ -38,9 +38,15 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusicGame() => PlayMusic("Game");
 
-    public void PlayWinner() => PlaySound("Winner");
+    public void PlayWinner() => PlayMusic("Win");
 
-    public void PlayGameOver() => PlaySound("GameOver");
+    public void PlayGameOver() => PlayMusic("GameOver");
+
+    public void PlayGetCoin() => PlaySound("GetCoin");
+
+    public void PlayDropTomb() => PlaySound("DropTomb");
+
+    public void PlayBuildBlock() => PlaySound("BuildBlock");
 
     private void PlayMusic(string name)
     {
@@ -50,6 +56,19 @@ public class AudioManager : MonoBehaviour
         {
             _audioSourceMusic.clip = audio.Music;
             _audioSourceMusic.Play();
+        }
+    }
+
+    private void SetMusicSource(string name)
+    {
+        var audio = FindAudio(name);
+
+        if (audio != null)
+        {
+            _audioSourceMusic.clip = audio.Music;
+
+            if(IsAudioOn())
+                _audioSourceMusic.Play();
         }
     }
 
@@ -84,6 +103,6 @@ public class AudioManager : MonoBehaviour
         if (IsSoundOn() == false)
             _audioSourceSound.Stop();
 
-        PlayMusic(ManagerScenes.Instance.NameActiveScene);
+        SetMusicSource(ManagerScenes.Instance.NameActiveScene);
     }
 }

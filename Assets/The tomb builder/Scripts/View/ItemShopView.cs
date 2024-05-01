@@ -20,7 +20,7 @@ public class ItemShopView : MonoBehaviour
     {
         ManagerUniRx.AddObjectDisposable(OnPurchasedCommand);
         _purchase.onClick.AddListener(() => { OnPurchaseLevel(); });
-        _viewPrice.text = "Buy" + _price.ToString();
+        _viewPrice.text = "Buy " + _price.ToString();
     }
 
     private void OnPurchaseLevel()
@@ -35,12 +35,12 @@ public class ItemShopView : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_numberLevel > ContainerSaveerPlayerPrefs.Instance.SaveerData.Level)
-            SetActiveButtons(true, false, false);
-        else if (_numberLevel == ContainerSaveerPlayerPrefs.Instance.SaveerData.Level)
+        if (ContainerSaveerPlayerPrefs.Instance.SaveerData.PurchasedLevels.Contains(_numberLevel.ToString()))
             SetActiveButtons(false, false, true);
         else if (ContainerSaveerPlayerPrefs.Instance.SaveerData.EndLevels.Contains((_numberLevel - 1).ToString()))
             SetActiveButtons(false, true, false);
+        else
+            SetActiveButtons(true, false, false);
     }
 
     private void SetActiveButtons(bool isClose, bool isPurchase, bool isPurchased)
