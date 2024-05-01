@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         _tombController.OnWinGame.Subscribe(_ => { _timelineManager.SetPauseTimer(true); });
         _tombController.OnWinGame.Subscribe(_ => { _systemInput.OnSetActivePause(true); });
         _tombController.OnWinGame.Subscribe(_ => { ManagerUniRx.Dispose(_healthManager.GameOverCommand); });
+        _tombController.OnGetMoneyCommand.Subscribe(_ => { _scoreManager.AddMoney(); });
 
         _healthManager.GameOverCommand.Subscribe(_ => { _gameOverView.SetActive(true); });
         _healthManager.GameOverCommand.Subscribe(_ => { _timelineManager.SetPauseTimer(true); });
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
         ManagerUniRx.AddObjectDisposable(_timelineManager.OnTimerEndCommand);
         ManagerUniRx.AddObjectDisposable(_healthManager.GameOverCommand);
         ManagerUniRx.AddObjectDisposable(_tombController.OnTombDestroyCommand);
+        ManagerUniRx.AddObjectDisposable(_tombController.OnGetMoneyCommand);
     }
 
     private void FixedUpdate()

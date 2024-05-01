@@ -104,7 +104,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 45710f3f56fd59e41b643a3107238c04, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1731624c0c1c9e34dbe6c5c6cf2e6bd1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -129,9 +129,12 @@ MonoBehaviour:
   _stepIncreaseScale: {x: 0.04, y: 0.04, z: 0}
   _speedIncreaseScale: 0.01
   _colorDrop: {r: 0.8584906, g: 0.44868279, b: 0.44868279, a: 1}
+  _minDistanceForEqualBuilded: 0.4
   _center: {fileID: 4172265268008666302}
   _image: {fileID: 660460409467955959}
   _rigidbody: {fileID: -2510623642833184984}
+  _boxCollider: {fileID: 5156311377054598407}
+  _rectTransform: {fileID: 425590468522406140}
 --- !u!50 &-2510623642833184984
 Rigidbody2D:
   serializedVersion: 4
@@ -202,5 +205,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 200.9154, y: 55.513306}
+  m_Size: {x: 201, y: 55.513306}
   m_EdgeRadius: 0

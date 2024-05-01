@@ -12,6 +12,7 @@ public class TombController
 
     public ReactiveCommand OnTombDestroyCommand = new ();
     public ReactiveCommand OnWinGame = new();
+    public ReactiveCommand OnGetMoneyCommand = new();
 
     public TombController(Tomb tomb)
     {
@@ -28,6 +29,7 @@ public class TombController
         _isBlockBuild = true;
         _lastBlockView = blockView;
         blockView.OnBlockDownCommand.Subscribe(_ => { OnTombDestroyCommand.Execute(); });
+        blockView.OnWidthBlockEqualCommand.Subscribe(_ => { OnGetMoneyCommand.Execute(); });
 
         var block = new Block();
         block.Center = blockView.Center;

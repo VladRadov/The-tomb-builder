@@ -34,21 +34,25 @@ public class AudioManager : MonoBehaviour
 
     public void PlayClickButton() => PlaySound("ClickButton");
 
-    public void PlayMusicMenu() => PlayMusic("Menu");
+    public void PlayMusicMenu() => PlayMusic("Menu", true);
 
-    public void PlayMusicGame() => PlayMusic("Game");
+    public void PlayMusicGame() => PlayMusic("Game", true);
 
-    public void PlayWinner() => PlayMusic("Win");
+    public void PlayWinner() => PlayMusic("Win", false);
 
-    public void PlayGameOver() => PlayMusic("GameOver");
+    public void PlayGameOver() => PlayMusic("GameOver", false);
 
-    public void PlayGetCoin() => PlaySound("GetCoin");
+    public void PlayGetScore() => PlaySound("GetScore");
+
+    public void PlayGetMoney() => PlaySound("GetMoney");
 
     public void PlayDropTomb() => PlaySound("DropTomb");
 
     public void PlayBuildBlock() => PlaySound("BuildBlock");
 
-    private void PlayMusic(string name)
+    public void PlayNotEnoughMoney() => PlaySound("NotEnoughMoney");
+
+    private void PlayMusic(string name, bool isLoop)
     {
         var audio = FindAudio(name);
 
@@ -56,6 +60,7 @@ public class AudioManager : MonoBehaviour
         {
             _audioSourceMusic.clip = audio.Music;
             _audioSourceMusic.Play();
+            _audioSourceMusic.loop = isLoop;
         }
     }
 

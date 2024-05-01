@@ -30,9 +30,10 @@ public class HealthManager : MonoBehaviour
     private void Start()
     {
         _currentHealthIcon = new List<HealthIconView>();
-        _currentHealth = _countHealth;
+        _currentHealth = _countHealth + ContainerSaveerPlayerPrefs.Instance.SaveerData.AdditionallyHealth;
+        ContainerSaveerPlayerPrefs.Instance.SaveerData.AdditionallyHealth = 0;
 
-        for (int i = 0; i < _countHealth; i++)
+        for (int i = 0; i < _currentHealth; i++)
         {
             var healthIcon = Instantiate(_prefabHhealthIconView, _healthLine.transform);
             healthIcon.SetIcon(_icon);

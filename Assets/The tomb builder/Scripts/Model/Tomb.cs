@@ -41,7 +41,7 @@ public class Tomb
 
     public void IncreaseScaleLastBlock()
     {
-        if(_isTombBuildEnd == false &&_isIncreaseScaleLastBlock)
+        if(_isTombBuildEnd == false && _isIncreaseScaleLastBlock)
             LastBlock.IncreaseScale();
     }
 }

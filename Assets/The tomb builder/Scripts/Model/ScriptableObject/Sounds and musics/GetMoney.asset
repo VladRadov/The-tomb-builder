@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ada147169758a874bac2c9390e91e2ea, type: 3}
-  m_Name: GetCoin
+  m_Name: GetMoney
   m_EditorClassIdentifier: 
-  _name: GetCoin
+  _name: GetMoney
   _music: {fileID: 8300000, guid: 24a6554664395dc4fa5aca8fe9cbf97e, type: 3}
