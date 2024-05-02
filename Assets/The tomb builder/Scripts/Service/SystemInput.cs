@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using UnityEngine.EventSystems;
 
 public class SystemInput : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class SystemInput : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(_isPauseGame == false)
+        if (_isPauseGame == false)
             OnMouseDownCommand.Execute();
     }
 

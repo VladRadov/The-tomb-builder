@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4
   m_EditorClassIdentifier: 
   _numberLevel: 4
-  _countBlocksGame: 40
+  _countBlocksGame: 60
   _timeBuildBlock: 3
   _background: {fileID: 21300000, guid: 8e19582dc973c5b4f8fa68e2165de9eb, type: 3}
   _typeBlock: {fileID: 21300000, guid: 8de61a39252c1de4d89f85b2294bd8c9, type: 3}

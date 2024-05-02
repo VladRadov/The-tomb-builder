@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
-using UniRx;
 
 public class Tomb
 {
@@ -50,8 +49,19 @@ public class Tomb
     public void DeleteLastBlock()
         => _blocks.Remove(LastBlock);
 
-    public void SetIsIncreaseScaleLastBlock(bool value)
-        => _isIncreaseScaleLastBlock = value;
+    public async void SetIsIncreaseScaleLastBlock(bool value)
+    {
+        if (value == false && ContainerSaveerPlayerPrefs.Instance.SaveerData.IsPurchasedMagnet == 1)
+        {
+            await Task.Run(() =>
+            {
+                while (Vector3.Distance(LastBlock.Scale.Value, new Vector3(1, 1, 0)) > 0.05)
+                    continue;
+            });
+        }
+
+        _isIncreaseScaleLastBlock = value;
+    }
 
     public void IncreaseScaleLastBlock()
     {

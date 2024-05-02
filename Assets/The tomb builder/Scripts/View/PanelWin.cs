@@ -43,5 +43,6 @@ public class PanelWin : MonoBehaviour
     {
         _coinsOfGame.text = "Score: " + ContainerSaveerPlayerPrefs.Instance.SaveerData.Coins.ToString();
         _coinsAllGame.text = ContainerSaveerPlayerPrefs.Instance.SaveerData.Money.ToString();
+        ContainerSaveerPlayerPrefs.Instance.SaveerData.IsPurchasedMagnet = 0;
     }
 }
