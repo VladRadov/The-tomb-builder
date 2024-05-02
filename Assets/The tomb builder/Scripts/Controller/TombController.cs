@@ -44,10 +44,15 @@ public class TombController
         AudioManager.Instance.PlayBuildBlock();
     }
 
-    public void CheckingGetMoney()
+    public void ActionAfterBuildBlock()
     {
         if (_tomb.TryBlocksEqual())
             OnBlocksEqualCommand.Execute();
+
+        _lastBlockView.NotCollisionWithWall();
+
+        if (_tomb.LastBlock.TryScale() == false)
+            OnSizeLimitExceededCommand.Execute();
     }
 
     public bool TryBuildBlockTop()

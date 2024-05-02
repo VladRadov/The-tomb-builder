@@ -38,6 +38,14 @@ public class Block : IDisposable
         Scale.Value += _stepIncreaseScale;
     }
 
+    public bool TryScale()
+    {
+        if (Scale.Value.x > 0.2f && Scale.Value.y > 0.2f)
+            return true;
+
+        return false;
+    }
+
     public void Dispose()
     {
         ManagerUniRx.Dispose(Position);

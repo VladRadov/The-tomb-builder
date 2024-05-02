@@ -51,6 +51,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayGetScore() => PlaySound("GetScore", _audioSourceSound);
 
+    public void PlayMagnit() => PlaySound("Magnit", _audioSourceSound);
+
     public void PlayGetMoney() => PlaySound("GetMoney", _audioSourceSound2);
 
     public void PlayDropTomb() => PlaySound("DropTomb", _audioSourceSound);

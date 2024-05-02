@@ -7,10 +7,12 @@ using UniRx;
 public class BlockView : MonoBehaviour
 {
     private bool _isBuilded;
+    private float _speedFall = -6;
 
     [SerializeField] private Vector3 _stepIncreaseScale;
     [SerializeField] private float _speedIncreaseScale;
     [SerializeField] private Color _colorDrop;
+    [SerializeField] private Vector2 _minScaleBlock;
     [Header("Components")]
     [SerializeField] private Transform _center;
     [SerializeField] private Image _image;
@@ -47,7 +49,16 @@ public class BlockView : MonoBehaviour
     }
 
     public bool TryTombBreak()
-        => _rigidbody.velocity.y < -6;
+        => _rigidbody.velocity.y < _speedFall;
+
+    public void NotCollisionWithWall()
+    {
+        if (_boxCollider != null)
+        {
+            var layerMask = LayerMask.GetMask("Wall");
+            _boxCollider.excludeLayers = layerMask;
+        }
+    }
 
     private void Start()
     {
@@ -64,12 +75,13 @@ public class BlockView : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var wallView = collision.gameObject.GetComponent<WallView>();
-
-        if (wallView)
+        if (_boxCollider.isTrigger == false && wallView)
+        {
+            _boxCollider.isTrigger = true;
             OnSizeLimitExceededCommand.Execute();
+        }
 
         var blockVIew = collision.gameObject.GetComponent<BlockView>();
-
         if (blockVIew)
             _isBuilded = true;
     }

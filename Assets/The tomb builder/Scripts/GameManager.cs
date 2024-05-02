@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         _systemInput.OnMouseUpCommand.Subscribe( _ => { _timelineManager.RestartTimer(); } );
         _systemInput.OnMouseUpCommand.Subscribe( _ => { if(_tombController.IsBlockBuild) _scoreManager.AddMoney(); } );
         _systemInput.OnMouseUpCommand.Subscribe( _ => { _tombController.CheckingFinishLevel(); } );
-        _systemInput.OnMouseUpCommand.Subscribe( _ => { _tombController.CheckingGetMoney(); } );
+        _systemInput.OnMouseUpCommand.Subscribe( _ => { _tombController.ActionAfterBuildBlock(); } );
 
         _spawnerController.OnSpawnBlockComand.Subscribe((block) => { _tombController.AddBlockToTomb(block); });
     }

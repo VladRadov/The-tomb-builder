@@ -53,9 +53,10 @@ public class Tomb
     {
         if (value == false && ContainerSaveerPlayerPrefs.Instance.SaveerData.IsPurchasedMagnet == 1)
         {
+            AudioManager.Instance.PlayMagnit();
             await Task.Run(() =>
             {
-                while (Vector3.Distance(LastBlock.Scale.Value, new Vector3(1, 1, 0)) > 0.05)
+                while (LastBlock != null && Vector3.Distance(LastBlock.Scale.Value, new Vector3(1, 1, 0)) > 0.05)
                     continue;
             });
         }
