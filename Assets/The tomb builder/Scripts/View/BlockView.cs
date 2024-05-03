@@ -20,8 +20,8 @@ public class BlockView : MonoBehaviour
     [SerializeField] private BoxCollider2D _boxCollider;
     [SerializeField] private RectTransform _rectTransform;
 
-    public Rigidbody2D BaseRigidbody => _rigidbody;
-    public Transform Center => _center;
+    public BoxCollider2D BoxCollider => _boxCollider;
+    //public Transform Center => _center;
     public float Width => _rectTransform.localScale.x;
     public Vector3 StepIncreaseScale => _stepIncreaseScale;
     public float SpeedIncreaseScale => _speedIncreaseScale;
@@ -34,6 +34,9 @@ public class BlockView : MonoBehaviour
 
     public void UpdatePosition(Vector2 newPosition)
         => transform.localPosition = newPosition;
+
+    public void UpdatePositionWorld(Vector2 newPosition)
+        => transform.position = newPosition;
 
     public void UpdateScale(Vector3 scale)
         => transform.localScale = scale;
@@ -58,6 +61,12 @@ public class BlockView : MonoBehaviour
             var layerMask = LayerMask.GetMask("Wall");
             _boxCollider.excludeLayers = layerMask;
         }
+    }
+
+    public void SetStaticBodyTypeRigidbody()
+    {
+        if(_rigidbody != null)
+            _rigidbody.bodyType = RigidbodyType2D.Static;
     }
 
     private void Start()

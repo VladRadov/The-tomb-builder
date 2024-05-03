@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -25,14 +26,14 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.PlayMusicGame();
 
-        _tomb = new Tomb(_dataTomb.PositionFirstBlock, _dataTomb.MinDistanceEqualBlock);
+        _tomb = new Tomb(_dataTomb.PositionFirstBlock, _dataTomb.MinDistanceEqualBlock, _dataTomb.MinScaleBlock);
         _tombController = new TombController(_tomb);
 
         Subscriber();
         AddObjectsDisposable();
 
         _levelManager.LoadingLevel();
-        _spawnerController.SpawnBlock(_tomb.LastBlock, _tombController.TryBuildBlockTop());
+        _spawnerController.SpawnBlock(_tomb.LastBlock, null, _tombController.TryBuildBlockTop());
     }
 
     private void Subscriber()
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
         _levelManager.LevelLoadingCommand.Subscribe(level => { _tombController.SetCountBlocksGame(level.CountBlocksGame); });
 
         _tombController.OnTombDestroyCommand.Subscribe(_ => { StartCoroutine(OnTombDestroy()); });
-        _tombController.OnWinGame.Subscribe(_ => { _panelWin.SetActive(true); });
+        _tombController.OnWinGame.Subscribe(_ => { StartCoroutine(_panelWin.SetActive(true)); });
         _tombController.OnWinGame.Subscribe(_ => { _timelineManager.SetPauseTimer(true); });
         _tombController.OnWinGame.Subscribe(_ => { _systemInput.OnSetActivePause(true); });
         _tombController.OnWinGame.Subscribe(_ => { ManagerUniRx.Dispose(_healthManager.GameOverCommand); });
@@ -65,8 +66,8 @@ public class GameManager : MonoBehaviour
         _timelineManager.OnTimerEndCommand.Subscribe(_ => { _tombController.OnEndTimer(); });
         _timelineManager.OnTimerEndCommand.Subscribe(_ => { _healthManager.Damage(); });
 
-        _systemInput.OnMouseDownCommand.Subscribe( _ => { _spawnerController.SpawnBlock(_tomb.LastBlock, _tombController.TryBuildBlockTop()); } );
-        _systemInput.OnMouseDownCommand.Subscribe( _ => { if(_tomb.LastBlock is Block) _followTomb.SetTarget(_tomb.LastBlock.Position.Value); } );
+        _systemInput.OnMouseDownCommand.Subscribe( _ => { _spawnerController.SpawnBlock(_tomb.LastBlock, _tombController.LastBlockView, _tombController.TryBuildBlockTop()); } );
+        _systemInput.OnMouseDownCommand.Subscribe( _ => { if(_tomb.LastBlock is Block) _followTomb.SetTarget(_tombController.LastBlockView.transform.position); } );
         _systemInput.OnMouseDownCommand.Subscribe( _ => { _tomb.SetIsIncreaseScaleLastBlock(true); } );
         _systemInput.OnMouseUpCommand.Subscribe( _ => { _tomb.SetIsIncreaseScaleLastBlock(false); } );
         _systemInput.OnMouseUpCommand.Subscribe( _ => { _timelineManager.RestartTimer(); } );
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
         ManagerUniRx.AddObjectDisposable(_tombController.OnTombDestroyCommand);
         ManagerUniRx.AddObjectDisposable(_tombController.OnBlocksEqualCommand);
         ManagerUniRx.AddObjectDisposable(_tombController.OnSizeLimitExceededCommand);
+        ManagerUniRx.AddObjectDisposable(_tombController.OnWinGame);
     }
 
     private void FixedUpdate()

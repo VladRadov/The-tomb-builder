@@ -6,9 +6,11 @@ using UniRx;
 public class TombController
 {
     private Tomb _tomb;
-    private BlockView _lastBlockView;
+    private List<BlockView> _blockViews;
     private bool _isBlockBuild;
     private int _countBlocksGame;
+
+    public BlockView LastBlockView => _blockViews[_blockViews.Count - 1];
 
     public ReactiveCommand OnTombDestroyCommand = new ();
     public ReactiveCommand OnWinGame = new();
@@ -18,6 +20,7 @@ public class TombController
     public TombController(Tomb tomb)
     {
         _tomb = tomb;
+        _blockViews = new List<BlockView>();
     }
 
     public void SetCountBlocksGame(int value)
@@ -28,12 +31,16 @@ public class TombController
     public void AddBlockToTomb(BlockView blockView)
     {
         _isBlockBuild = true;
-        _lastBlockView = blockView;
-        blockView.OnBlockDownCommand.Subscribe(_ => { OnTombDestroyCommand.Execute(); });
+        _blockViews.Add(blockView);
+        blockView.OnBlockDownCommand.Subscribe(_ =>
+        {
+            OnTombDestroyCommand.Execute();
+            _blockViews.RemoveAt(_blockViews.Count - 1);
+        });
         blockView.OnSizeLimitExceededCommand.Subscribe(_ => { OnSizeLimitExceededCommand.Execute(); });
+        OnWinGame.Subscribe(_ => { blockView.SetStaticBodyTypeRigidbody(); });
 
         var block = new Block();
-        block.Center = blockView.Center;
         block.UpdatePosition(blockView.transform.position);
         block.SetSpeedIncreaseScale(blockView.SpeedIncreaseScale);
         block.SetStepIncreaseScale(blockView.StepIncreaseScale);
@@ -49,10 +56,16 @@ public class TombController
         if (_tomb.TryBlocksEqual())
             OnBlocksEqualCommand.Execute();
 
-        _lastBlockView.NotCollisionWithWall();
+        LastBlockView.NotCollisionWithWall();
 
-        if (_tomb.LastBlock.TryScale() == false)
+        if (_tomb.TryLastBlockScale() == false)
+        {
             OnSizeLimitExceededCommand.Execute();
+            _tomb.DeleteLastBlock();
+            _tomb.SetIsIncreaseScaleLastBlock(false);
+            LastBlockView.StartCoroutineDropBlock();
+            _blockViews.RemoveAt(_blockViews.Count - 1);
+        }
     }
 
     public bool TryBuildBlockTop()
@@ -77,7 +90,7 @@ public class TombController
             _isBlockBuild = false;
             _tomb.DeleteLastBlock();
             _tomb.SetIsIncreaseScaleLastBlock(false);
-            _lastBlockView.StartCoroutineDropBlock();
+            LastBlockView.StartCoroutineDropBlock();
         }
     }
 

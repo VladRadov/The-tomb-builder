@@ -11,9 +11,17 @@ public class SpawnerController : MonoBehaviour
 
     public ReactiveCommand<BlockView> OnSpawnBlockComand = new();
 
-    public void SpawnBlock(Block parent, bool isBuildBlockTop)
+    public void SpawnBlock(Block parent, BlockView blockView, bool isBuildBlockTop)
     {
-        var block = Instantiate(isBuildBlockTop ? _prefabBlockTop : _prefabBlock, parent is BlockNull? _parent : parent.Center);
+        //var block = Instantiate(isBuildBlockTop ? _prefabBlockTop : _prefabBlock, parent is BlockNull ? _parent : parent.Center);
+
+        var block = Instantiate(isBuildBlockTop ? _prefabBlockTop : _prefabBlock, _parent);
+        if (blockView != null)
+        {
+            var newPosition = new Vector2(blockView.transform.localPosition.x, blockView.transform.localPosition.y + blockView.BoxCollider.size.y);
+            block.UpdatePositionWorld(newPosition);
+        }
+
         OnSpawnBlockComand.Execute(block);
     }
 

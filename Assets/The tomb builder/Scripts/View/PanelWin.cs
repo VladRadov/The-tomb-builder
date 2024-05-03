@@ -6,13 +6,37 @@ using TMPro;
 
 public class PanelWin : MonoBehaviour
 {
+    private float _startFieldOfViewCamera = 3;
+    private float _finishFieldOfViewCamera = 13;
+    private float _stepFieldUp = 0.01f;
+    private float _delayStepFieldUp = 0.001f;
+    private float _delayActivePanelWin = 3;
+    private Vector3 _maxScaleBackground = new Vector3(3, 3, 0);
+    [Header("UI")]
+    [SerializeField] private Image _background;
     [SerializeField] private Button _shop;
     [SerializeField] private Button _menu;
     [SerializeField] private TextMeshProUGUI _coinsOfGame;
     [SerializeField] private TextMeshProUGUI _coinsAllGame;
 
-    public void SetActive(bool value)
-        => gameObject.SetActive(value);
+    public IEnumerator SetActive(bool value)
+    {
+        Camera.main.orthographic = false;
+        Camera.main.fieldOfView = _startFieldOfViewCamera;
+        while (Camera.main.fieldOfView < _finishFieldOfViewCamera)
+        {
+            Camera.main.fieldOfView += _stepFieldUp;
+            var scaleBackground = _background.gameObject.transform.localScale;
+            if (scaleBackground.x < _maxScaleBackground.x)
+                _background.gameObject.transform.localScale += new Vector3(_stepFieldUp, _stepFieldUp, 0);
+
+            yield return new WaitForSeconds(_delayStepFieldUp);
+        }
+
+        yield return new WaitForSeconds(_delayActivePanelWin);
+
+        gameObject.SetActive(value);
+    }
 
     private void OnShop()
         => ManagerScenes.Instance.LoadAsyncFromCoroutine("Menu", () =>

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c680569a3719249bba2a0d7d7d02a2, type: 3}
   m_Name: DataTomb
   m_EditorClassIdentifier: 
-  _positionFirstBlock: {x: 0, y: -250}
+  _positionFirstBlock: {x: 0, y: -150}
   _minDistanceEqualBlock: 0.05
+  _minScaleBlock: 0.3

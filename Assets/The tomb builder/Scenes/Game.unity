@@ -772,7 +772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 131}
+  m_AnchoredPosition: {x: 0, y: 105}
   m_SizeDelta: {x: 565, y: 23.429993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &127893374
@@ -7520,6 +7520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53a3c1165cc4d944ac6db3eceaa8443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _background: {fileID: 0}
   _shop: {fileID: 1748974232}
   _menu: {fileID: 764690585}
   _coinsOfGame: {fileID: 2104859833}
@@ -8084,6 +8085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53a3c1165cc4d944ac6db3eceaa8443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _background: {fileID: 2126860611}
   _shop: {fileID: 759476498}
   _menu: {fileID: 787005011}
   _coinsOfGame: {fileID: 1748734499}

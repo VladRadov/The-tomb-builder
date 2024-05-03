@@ -20,7 +20,7 @@ public class Block : IDisposable
         Position.Value = position;
     }
 
-    public Transform Center { get; set; }
+    public Vector2 Center { get; set; }
     public ReactiveProperty<Vector2> Position { get; private set; } = new();
     public ReactiveProperty<Vector3> Scale { get; private set; } = new();
 
@@ -38,13 +38,13 @@ public class Block : IDisposable
         Scale.Value += _stepIncreaseScale;
     }
 
-    public bool TryScale()
-    {
-        if (Scale.Value.x > 0.2f && Scale.Value.y > 0.2f)
-            return true;
+    //public bool TryScale()
+    //{
+    //    if (Scale.Value.x > 0.2f && Scale.Value.y > 0.2f)
+    //        return true;
 
-        return false;
-    }
+    //    return false;
+    //}
 
     public void Dispose()
     {

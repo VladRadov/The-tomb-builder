@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b061e7c6df9445a0b4a7788dfcf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 120
+  _price: 1200
   _viewPrice: {fileID: 478448885}
   _purchase: {fileID: 581088012}
   _purchased: {fileID: 1134198878}
@@ -1513,7 +1513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b061e7c6df9445a0b4a7788dfcf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 30
+  _price: 300
   _viewPrice: {fileID: 285653239}
   _purchase: {fileID: 137558466}
   _purchased: {fileID: 749655001}
@@ -4293,7 +4293,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.47
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7317,7 +7317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b061e7c6df9445a0b4a7788dfcf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 90
+  _price: 900
   _viewPrice: {fileID: 321608770}
   _purchase: {fileID: 108316043}
   _purchased: {fileID: 1043024938}
@@ -7417,7 +7417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b061e7c6df9445a0b4a7788dfcf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 45
+  _price: 450
   _viewPrice: {fileID: 557910222}
   _purchase: {fileID: 1631553270}
   _purchased: {fileID: 310902202}
@@ -10630,7 +10630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b061e7c6df9445a0b4a7788dfcf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 60
+  _price: 600
   _viewPrice: {fileID: 1981223098}
   _purchase: {fileID: 1630990495}
   _purchased: {fileID: 282263693}
@@ -14063,7 +14063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568d34c7c4bd62b48abad7730dddcf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 10
+  _price: 300
   _viewPrice: {fileID: 2086466922}
   _purchase: {fileID: 1197351481}
   _purchased: {fileID: 1997538034}
@@ -14846,7 +14846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b061e7c6df9445a0b4a7788dfcf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 15
+  _price: 150
   _viewPrice: {fileID: 1140426979}
   _purchase: {fileID: 1242323704}
   _purchased: {fileID: 442725450}
@@ -18996,7 +18996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ab446ab8cdf5c49af56b36c044f282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 15
+  _price: 300
   _viewPrice: {fileID: 1912444166}
   _purchase: {fileID: 512264006}
   _purchased: {fileID: 678516711}
@@ -20640,7 +20640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b061e7c6df9445a0b4a7788dfcf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 75
+  _price: 750
   _viewPrice: {fileID: 525732093}
   _purchase: {fileID: 145065065}
   _purchased: {fileID: 1942455562}
@@ -22011,7 +22011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b061e7c6df9445a0b4a7788dfcf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 105
+  _price: 1050
   _viewPrice: {fileID: 1186043495}
   _purchase: {fileID: 814029177}
   _purchased: {fileID: 930909295}

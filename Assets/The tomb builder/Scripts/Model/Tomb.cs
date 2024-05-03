@@ -9,14 +9,16 @@ public class Tomb
     private bool _isIncreaseScaleLastBlock;
     private bool _isTombBuildEnd;
     private float _minDistanceEqualBlock;
+    private float _minScaleBlock;
 
-    public Tomb(Vector2 positionFirstBlock, float minDistanceEqualBlock)
+    public Tomb(Vector2 positionFirstBlock, float minDistanceEqualBlock, float minScaleBlock)
     {
         _blocks = new List<Block>();
         _positionFirstBlock = positionFirstBlock;
         _isIncreaseScaleLastBlock = false;
         _isTombBuildEnd = false;
         _minDistanceEqualBlock = minDistanceEqualBlock;
+        _minScaleBlock = minScaleBlock;
     }
 
     public int CountBlocks => _blocks.Count;
@@ -42,6 +44,14 @@ public class Tomb
             if (deltaScale <= _minDistanceEqualBlock)
                 return true;
         }
+
+        return false;
+    }
+
+    public bool TryLastBlockScale()
+    {
+        if (LastBlock.Scale.Value.x >= _minScaleBlock)
+            return true;
 
         return false;
     }
